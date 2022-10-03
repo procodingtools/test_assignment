@@ -25,7 +25,7 @@ To build the app you should check the requirements below:
 
 - [Build](#build)
 - [Test](#test)
-- [Generate documentations](#generate documentations)
+- [Generate documentations](#generate%20documentations)
 - [Run](#run)
   <br/>
 
