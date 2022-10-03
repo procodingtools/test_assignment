@@ -5,6 +5,10 @@ import 'package:test_assignment/features/categories/cubits/categories_cubit.dart
 import 'package:test_assignment/features/dataset/cubits/dataset_cubit.dart';
 import 'package:test_assignment/models/category.dart';
 
+/// {@category Category}
+/// {@subCategory Widgets}
+/// Search box for categories with autocomplete feature.
+/// Will send events when selected categories changed using BLoC.
 class CategoriesSearchBox extends StatelessWidget {
   const CategoriesSearchBox({Key? key}) : super(key: key);
 

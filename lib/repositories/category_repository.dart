@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:test_assignment/app/constants.dart';
 import 'package:test_assignment/models/category.dart';
-import 'package:test_assignment/services/cateories.dart';
+import 'package:test_assignment/services/categories_service.dart';
 
-/// {@template category_repository}
+/// {@category Category}
+/// {@subCategory Repositories}
 /// Category repository handles fetching categories from the Metadata API
-/// {@endtemplate}
 class CategoryRepository {
-  /// {@macro category_repository}
   CategoryRepository({CategoriesService? service})
       : service = service ?? CategoriesService();
 

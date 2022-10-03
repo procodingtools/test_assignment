@@ -35,6 +35,7 @@ class TagEditor<T> extends StatefulWidget {
     this.enabled = true,
     // TextField's properties
     this.controller,
+    this.onDelete,
     this.textStyle,
     this.inputDecoration = const InputDecoration(),
     this.keyboardType,
@@ -94,6 +95,8 @@ class TagEditor<T> extends StatefulWidget {
   /// in case you want to reset it for any reasons (like converting the
   /// outstanding value to tag).
   final bool resetTextOnSubmitted;
+
+  final Function(int index)? onDelete;
 
   /// Called when the user are done editing the text in the [TextField]
   /// Use this to get the outstanding text that aren't converted to tag yet
@@ -517,11 +520,13 @@ class TagsEditorState<T> extends State<TagEditor<T>> {
               link: _layerLink,
               child: Container(),
             ),
-            if (_isFocused)
-              Divider(
-                color: Theme.of(context).primaryColor,
-                height: 3,
-                thickness: 2,
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Divider(
+                  color: _isFocused ? Theme.of(context).primaryColor : Colors.transparent,
+                  height: 3,
+                  thickness: 2,
+                ),
               )
           ],
         ),

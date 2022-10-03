@@ -35,18 +35,19 @@ Future<void> main() async {
   final datasets = [dataset];
 
   group('Testing Datasets', () {
-    blocTest<DatasetCubit, DatasetState>('Search by categories', build: () {
-      categoriesCubit.toggleSearchCategory(category);
-      when(() => datasetRepository.searchDataset(datasetCubit))
-          .thenAnswer((_) async => datasets);
-      return datasetCubit;
-    },
-      act: (cubit) => cubit.search(),
-      expect: () => [
-        const DatasetState.loading(datasets: []),
-        DatasetState.finished(datasets: datasets),
-      ]
-    );
+    blocTest<DatasetCubit, DatasetState>('Search by categories',
+        build: () {
+          categoriesCubit.toggleSearchCategory(category);
+          when(() => datasetRepository.searchDataset(
+                  datasetCubit.categoryCubit.state.searchCategories,
+                  datasetCubit.categoryCubit.state.categories))
+              .thenAnswer((_) async => datasets);
+          return datasetCubit;
+        },
+        act: (cubit) => cubit.search(),
+        expect: () => [
+              const DatasetState.loading(datasets: []),
+              DatasetState.finished(datasets: datasets),
+            ]);
   });
-
 }

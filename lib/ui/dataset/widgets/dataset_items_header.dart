@@ -8,8 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 /// {@category Datasets}
 /// {@subCategory Widgets}
 /// Widget to select which items/segments to show.
-class DatasetItemHeader extends StatelessWidget {
-  const DatasetItemHeader({Key? key, required this.dataset}) : super(key: key);
+class DatasetItemsHeader extends StatelessWidget {
+  const DatasetItemsHeader({Key? key, required this.dataset}) : super(key: key);
 
   /// [DatasetModel] dataset
   final DatasetModel dataset;

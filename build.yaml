@@ -7,3 +7,7 @@ targets:
           explicit_to_json: true
           include_if_null: true
           create_to_json: true
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - type=lint

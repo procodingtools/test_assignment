@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'category.freezed.dart';
@@ -13,7 +15,7 @@ class CategoryModel with _$CategoryModel {
     @JsonKey(name: 'icon') @Default('') String icon,
   }) = _CategoryModel;
 
+
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
       _$CategoryModelFromJson(json);
-
 }

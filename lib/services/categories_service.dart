@@ -4,12 +4,11 @@ import 'package:test_assignment/app/constants.dart';
 import 'package:test_assignment/services/base_service.dart';
 
 
-/// {@template services}
+/// {@category Category}
+/// {@subCategory Services}
 /// Service to handle http requests for categories.
-/// {@endtemplate}
 class CategoriesService extends BaseService {
 
-  /// {@macro services}
   CategoriesService() {
     dio.options = BaseOptions(baseUrl: dotenv.get(cocoExplorer));
   }

@@ -9,8 +9,6 @@
 .history
 .svn/
 migrate_working_dir/
-*.g.dart
-*.freezed.dart
 
 # IntelliJ related
 *.iml
@@ -24,7 +22,9 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
+**/doc/
+*.g.dart
+*.freezed.dart
 **/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins

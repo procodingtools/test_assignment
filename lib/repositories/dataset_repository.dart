@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:test_assignment/features/dataset/cubits/dataset_cubit.dart';
+import 'package:test_assignment/models/category.dart';
 import 'package:test_assignment/models/dataset.dart';
 import 'package:test_assignment/models/segmentation.dart';
-import 'package:test_assignment/services/dataset.dart';
+import 'package:test_assignment/services/dataset_service.dart';
 
+/// {@category Datasets}
+/// {@subCategory Repositories}
+/// Dataset repository handles fetching categories from the API
 class DatasetRepository {
   DatasetRepository({DatasetService? service})
       : service = service ?? DatasetService();
@@ -14,17 +17,20 @@ class DatasetRepository {
 
   final List<int> _allIds = [];
 
-  Future<List<DatasetModel>> searchDataset(DatasetCubit datasetCubit) async {
-    final categories = datasetCubit.categoryCubit.state.searchCategories;
-    if (categories.isEmpty) {
+  /// Searching for list of categories
+  Future<List<DatasetModel>> searchDataset(List<CategoryModel> searchCategories,
+      List<CategoryModel> categories) async {
+    if (searchCategories.isEmpty) {
       return <DatasetModel>[];
     }
     _allIds.clear();
-    _allIds.addAll(await service.getImagesByCats(categories));
-    return await getNextDatasets(datasetCubit);
+    _allIds.addAll(await service.getImagesByCats(searchCategories));
+    return await getNextDatasets(categories);
   }
 
-  Future<List<DatasetModel>> getNextDatasets(DatasetCubit datasetCubit) async {
+  /// Getting the next 5 results. Used to perform lazyLoading
+  Future<List<DatasetModel>> getNextDatasets(
+      List<CategoryModel> categories) async {
     List<int> ids = [];
     List<DatasetModel> datasets = [];
     for (int i = 0; i < 5 && _allIds.isNotEmpty; i++) {
@@ -60,20 +66,19 @@ class DatasetRepository {
           SegmentationModel segmentation;
           if (list.isEmpty) {
             segmentation = SegmentationModel.empty();
-            segmentation.category = datasetCubit.categoryCubit.state.categories
+            segmentation.category = categories
                 .firstWhere((element) => element.id == map['category_id']);
             segmentations.add(segmentation);
           } else {
             segmentation = list.first;
           }
           try {
-            final segments = List.of(jsonDecode(map['segmentation'].toString()));
+            final segments =
+                List.of(jsonDecode(map['segmentation'].toString()));
             for (List segment in segments) {
               segmentation.segmentations.add(segment.cast<double>());
             }
-          } catch (e) {
-            print(e);
-          }
+          } catch (_) {}
 
           segmentation.color =
               Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(.5);

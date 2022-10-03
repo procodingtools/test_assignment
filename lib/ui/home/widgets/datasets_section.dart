@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_assignment/features/categories/cubits/categories_cubit.dart';
 import 'package:test_assignment/features/dataset/cubits/dataset_cubit.dart';
 import 'package:test_assignment/models/dataset.dart';
-import 'package:test_assignment/ui/dataset/widgets/dataset_view.dart';
+import 'package:test_assignment/ui/dataset/dataset_view.dart';
 
+/// {@category Datasets}
+/// {@subCategory Widgets}
+/// Widget contains [DatasetCubit] BLoC builder to show [DatasetView]
 class DatasetsSection extends StatelessWidget {
   const DatasetsSection({Key? key}) : super(key: key);
 
@@ -14,6 +17,7 @@ class DatasetsSection extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           orElse: () => _Content(datasets: state.datasets),
+          initial: (_) => const SizedBox.shrink(),
           loading: (_) => SizedBox(
             height: 250,
             width: double.infinity,
@@ -63,7 +67,7 @@ class _Content extends StatelessWidget {
         context.watch<DatasetCubit>().state.maybeWhen(
               orElse: SizedBox.shrink,
               loaded: (_) => const Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: CircularProgressIndicator(),
               ),
             ),
