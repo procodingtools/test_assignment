@@ -5,6 +5,9 @@ assignment. The app is acting as [COCO explorer](https://cocodataset.org/#explor
 port for mobile devices, capable to fetch images and draw segmentations over each one for every
 object in the image.
 
+![demo](https://user-images.githubusercontent.com/50031998/193664741-e69a18f0-0cf6-4796-ab08-e3d02c587b4f.gif)
+
+
 ## Getting started
 
 This Application is using the native COCO dataset API. The state is managed
@@ -22,14 +25,14 @@ To build the app you should check the requirements below:
 
 - [Build](#build)
 - [Test](#test)
-- [Generate documentations](#generate documentations)
+- [Generate documentations](#generate-documentations)
 - [Run](#run)
   <br/>
 
 ## Build
 
 To build this app, first you have to let freezed and json_serializable generate the model files. So
-that, we have a shell script which can do the entire build chain by itself. just run
+that, we have a shell script which can do the entire build chain by itself, (only on macOS or Linux). just run
 <pre>$     sudo chmod +x ./build.sh</pre>
 enter your password
 <pre>$     ./build.sh</pre>
